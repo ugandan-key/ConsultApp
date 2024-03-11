@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ConsultaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/consultas', [ConsultaController::class, 'index'])->name('consultas.index');
+
+Route::get('/consultas/create', [ConsultaController::class, 'create'])->name('consultas.create');
+
+Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
+
 
 require __DIR__.'/auth.php';
