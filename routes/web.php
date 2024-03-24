@@ -35,5 +35,4 @@ Route::get('/consultas/create', [ConsultaController::class, 'create'])->name('co
 
 Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
 
-
 require __DIR__.'/auth.php';
