@@ -13,26 +13,26 @@ return new class extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('CURP');
-            $table->string('NOMBRE');
-            $table->string('APELLIDO_PATERNO');
-            $table->string('APELLIDO_MATERNO');
-            $table->string('NIVEL_SOCIOECONOMICO');
-            $table->string('VIVIENDA');
-            $table->string('TIPO_SANGUINEO');
-            $table->string('DISCAPACIDAD');
-            $table->string('GRUPO_ETNICO');
-            $table->string('RELIGION');
-            $table->string('CALLE');
-            $table->string('NUMERO_EXT');
-            $table->string('NUMERO_INT');
-            $table->string('ESTADO');
-            $table->string('MUNICIPIO');
-            $table->string('LOCALIDAD');
-            $table->string('COLONIA');
-            $table->string('CODIGO_POSTAL');
-            $table->string('TELEFONO_1');
-            $table->string('TELEFONO_2');
+            $table->string('CURP', 255);
+            $table->string('NOMBRE', 255);
+            $table->string('APELLIDO_PATERNO', 255);
+            $table->string('APELLIDO_MATERNO', 255);
+            $table->string('NIVEL_SOCIOECONOMICO', 255);
+            $table->string('VIVIENDA', 255);
+            $table->string('TIPO_SANGUINEO', 255);
+            $table->string('DISCAPACIDAD', 255);
+            $table->string('GRUPO_ETNICO', 255);
+            $table->string('RELIGION', 255);
+            $table->string('CALLE', 255);
+            $table->string('NUMERO_EXT', 255);
+            $table->string('NUMERO_INT', 255);
+            $table->string('ESTADO', 255);
+            $table->string('MUNICIPIO', 255);
+            $table->string('LOCALIDAD', 255);
+            $table->string('COLONIA', 255);
+            $table->string('CODIGO_POSTAL', 255);
+            $table->string('TELEFONO_1', 255);
+            $table->string('TELEFONO_2', 255);
             $table->timestamps();
         });
     }
