@@ -43,4 +43,6 @@ Route::get('/nav', function () {
     return view('nav');
 });
 
+Route::get('/calendar', function () {return view('calendar');});
+
 require __DIR__.'/auth.php';
