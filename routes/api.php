@@ -34,6 +34,11 @@ Route::post('/rols', 'App\Http\Controllers\RoleController@store');
 Route::put('/rols/{id}', 'App\Http\Controllers\RoleController@update');
 Route::delete('/rols/{id}','App\Http\Controllers\RoleController@destroy');
 
+Route::get('/citas', 'App\Http\Controllers\CitaController@index');
+Route::post('/citas', 'App\Http\Controllers\CitaController@store');
+Route::put('/citas/{id}', 'App\Http\Controllers\CitaController@update');
+Route::delete('/citas/{id}', 'App\Http\Controllers\CitaController@destroy');
+
 Route::get('/usuarios', 'App\Http\Controllers\UsuariosController@index');
 Route::post('/usuarios', 'App\Http\Controllers\UsuariosController@store');
 Route::get('/usuarios/{id}', 'App\Http\Controllers\UsuariosController@update');
