@@ -29,10 +29,10 @@ Route::post('/historias', 'App\Http\Controllers\HistoriaController@store');
 Route::put('/historias/{id}', 'App\Http\Controllers\HistoriaController@update');
 Route::delete('/historias/{id}', 'App\Http\Controllers\HistoriaController@destroy');
 
-Route::get('/rols', 'App\Http\Controllers\RolController@index');
-Route::post('/rols', 'App\Http\Controllers\RolController@store');
-Route::put('/rols/{id}', 'App\Http\Controllers\RolController@update');
-Route::delete('/rols/{id}','App\Http\Controllers\RolController@destroy');
+Route::get('/rols', 'App\Http\Controllers\RoleController@index');
+Route::post('/rols', 'App\Http\Controllers\RoleController@store');
+Route::put('/rols/{id}', 'App\Http\Controllers\RoleController@update');
+Route::delete('/rols/{id}','App\Http\Controllers\RoleController@destroy');
 
 Route::get('/usuarios', 'App\Http\Controllers\UsuariosController@index');
 Route::post('/usuarios', 'App\Http\Controllers\UsuariosController@store');
