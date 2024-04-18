@@ -33,3 +33,8 @@ Route::get('/rols', 'App\Http\Controllers\RolController@index');
 Route::post('/rols', 'App\Http\Controllers\RolController@store');
 Route::put('/rols/{id}', 'App\Http\Controllers\RolController@update');
 Route::delete('/rols/{id}','App\Http\Controllers\RolController@destroy');
+
+Route::get('/usuarios', 'App\Http\Controllers\UsuariosController@index');
+Route::post('/usuarios', 'App\Http\Controllers\UsuariosController@store');
+Route::get('/usuarios/{id}', 'App\Http\Controllers\UsuariosController@update');
+Route::delete('/usuarios/{id}', 'App\Http\Controllers\UsuariosController@destroy');
