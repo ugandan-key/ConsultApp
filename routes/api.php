@@ -18,8 +18,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::get('/pacientes', 'App\Http\Controllers\PacienteController@index');
 Route::post('/pacientes', 'App\Http\Controllers\PacienteController@store');
 Route::put('/pacientes/{id}', 'App\Http\Controllers\PacienteController@update');
 Route::delete('/pacientes/{id}', 'App\Http\Controllers\PacienteController@destroy');
+
+
+Route::get('/historias', 'App\Http\Controllers\HistoriaController@index');
+Route::post('/historias', 'App\Http\Controllers\HistoriaController@store');
+Route::put('/historias/{id}', 'App\Http\Controllers\HistoriaController@update');
+Route::delete('/historias/{id}', 'App\Http\Controllers\HistoriaController@destroy');
