@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,6 @@ Route::get('/usuarios', 'App\Http\Controllers\UsuariosController@index');
 Route::post('/usuarios', 'App\Http\Controllers\UsuariosController@store');
 Route::get('/usuarios/{id}', 'App\Http\Controllers\UsuariosController@update');
 Route::delete('/usuarios/{id}', 'App\Http\Controllers\UsuariosController@destroy');
+
+Route::get('/events', [EventController::class, 'index']);
+Route::apiResource('events', EventController::class);
