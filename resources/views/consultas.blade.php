@@ -71,9 +71,9 @@
 </head>
 
 <body>
-    <header>
-        <h1>Listado de Consultas</h1>
-    </header>
+    
+        @include('nav')
+    
     
     <main>
         <div class="container">
