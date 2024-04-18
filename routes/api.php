@@ -28,3 +28,8 @@ Route::get('/historias', 'App\Http\Controllers\HistoriaController@index');
 Route::post('/historias', 'App\Http\Controllers\HistoriaController@store');
 Route::put('/historias/{id}', 'App\Http\Controllers\HistoriaController@update');
 Route::delete('/historias/{id}', 'App\Http\Controllers\HistoriaController@destroy');
+
+Route::get('/rols', 'App\Http\Controllers\RolController@index');
+Route::post('/rols', 'App\Http\Controllers\RolController@store');
+Route::put('/rols/{id}', 'App\Http\Controllers\RolController@update');
+Route::delete('/rols/{id}','App\Http\Controllers\RolController@destroy');
