@@ -30,8 +30,8 @@ class CitaController extends Controller
     public function store(Request $request)
     {
         $cita = new Cita();
-        $cita->fecha = $request->date;
-        $cita->hora = $request->time;
+        $cita->fecha = $request->fecha;
+        $cita->hora = $request->hora;
         $cita->doctor = $request->doctor;
         $cita->save();
     }
