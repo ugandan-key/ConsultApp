@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.2/dist/sweetalert2.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,
+minimal-ui">
+    <style>
+        #app {
+            background-color: #CFD8DC;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <v-main>
+                <h2 class="text-center">PACIENTES</h2>
+                <!-- Botón CREAR -->
+                <v-card class="mx-auto mt-5" color="transparent" max-width="1280" elevation="0">
+                    <v-btn class="mx-2" fab dark color="#5AA7A7" @click="formNuevo()">
+                        <v-icon dark>mdi-plus</v-icon>
+                    </v-btn>
+                        <!-- Tabla y formulario -->
+                        <v-simple-table class="mt-5">
+                            <template v-slot:default>
+                                <thead>
+                                    <tr class="blue-grey darken-2">
+                                        <th class="white--text">ID</th>
+                                        <th class="white--text">CURP</th>
+                                        <th class="white--text">NOMBRE</th>
+                                        <th class="white--text">APPELLIDO PATERNO</th>
+                                        <th class="white--text">APPELLIDO MATERNO</th>
+                                        <th class="white--text">NIVEL SOCIOECONÓMICO</th>
+                                        <th class="white--text">VIVIENDA</th>
+                                        <th class="white--text">TIPO SANGUÍNEO</th>
+                                        <th class="white--text">DISCAPACIDAD</th>
+                                        <th class="white--text">GRUPO ÉTNICO</th>
+                                        <th class="white--text">RELIGIÓN </th>
+                                        <th class="white--text">CALLE</th>
+                                        <th class="white--text">NÚMERO EXTERIOR</th>
+                                        <th class="white--text">NÚMERO INTERIOR</th>
+                                        <th class="white--text">ESTADO</th>
+                                        <th class="white--text">MUNICIPIO</th>
+                                        <th class="white--text">LOCALIDAD</th>
+                                        <th class="white--text">COLONIA</th>
+                                        <th class="white--text">CÓDIGO POSTAL</th>
+                                        <th class="white--text">TELÉFONO 1</th>
+                                        <th class="white--text">TELÉFONO 2</th>
+
+                                        <th class="white--text text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="paciente in pacientes" :key="paciente.id">
+                                        <td>{{ paciente.id }}</td>
+                                        <td>{{ paciente.CURP }}</td>
+                                        <td>{{ paciente.NOMBRE }}</td>
+                                        <td>{{ paciente.APELLIDO_PATERNO }}</td>
+                                        <td>{{ paciente.APELLIDO_MATERNO }}</td>
+                                        <td>{{ paciente.NIVEL_SOCIOECONOMICO }}</td>
+                                        <td>{{ paciente.VIVIENDA }}</td>
+                                        <td>{{ paciente.TIPO_SANGUINEO }}</td>
+                                        <td>{{ paciente.DISCAPACIDAD }}</td>
+                                        <td>{{ paciente.GRUPO_ETNICO }}</td>
+                                        <td>{{ paciente.RELIGION }}</td>
+                                        <td>{{ paciente.CALLE }}</td>
+                                        <td>{{ paciente.NUMERO_EXT }}</td>
+                                        <td>{{ paciente.NUMERO_INT }}</td>
+                                        <td>{{ paciente.ESTADO }}</td>
+                                        <td>{{ paciente.MUNICIPIO }}</td>
+                                        <td>{{ paciente.LOCALIDAD }}</td>
+                                        <td>{{ paciente.COLONIA }}</td>
+                                        <td>{{ paciente.CODIGO_POSTAL }}</td>
+                                        <td>{{ paciente.TELEFONO_1 }}</td>
+                                        <td>{{ paciente.TELEFONO_2 }}</td>
+                                        <td>
+                                            <v-btn class="pink" dark small fab @click="formEditar(paciente.id, paciente.CURP, paciente.NOMBRE, paciente.APELLIDO_PATERNO, paciente.APELLIDO_MATERNO, 
+                                            paciente.NIVEL_SOCIOECONOMICO, paciente.VIVIENDA, paciente.TIPO_SANGUINEO, paciente.DISCAPACIDAD, paciente.GRUPO_ETNICO, paciente.RELIGION, paciente.CALLE,
+                                            paciente.NUMERO_EXT, paciente.NUMERO_INT, paciente.ESTADO, paciente.MUNICIPIO, paciente.LOCALIDAD, paciente.COLONIA, paciente.CODIGO_POSTAL,
+                                            paciente.TELEFONO_1, paciente.TELEFONO_2)"><v-icon>mdi-pencil</v-icon></v-btn>
+                                            <v-btn class="error" fab dark small
+                                                @click="borrar(paciente.id)"><v-icon>mdi-delete</v- icon></v-btn>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </template>
+                        </v-simple-table>
+                </v-card>
+                <!-- Componente de Diálogo para CREAR y EDITAR -->
+                <v-dialog v-model="dialog" max-width="500">
+                    <v-card>
+                        <v-card-title class="purple darken-4 white--text">Paciente</v-card-title>
+                        <v-card-text>
+                            <v-form>
+                                <v-container>
+                                    <v-row>
+                                        <input v-model="paciente.id" hidden></input>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.CURP" label="CURP" solo
+                                                required>{{paciente.CURP}}</v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.NOMBRE" label="NOMBRE"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.APELLIDO_PATERNO" label="APELLIDO_PATERNO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.APELLIDO_MATERNO" label="APELLIDO_MATERNO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.NIVEL_SOCIOECONOMICO" label="NIVEL_SOCIOECONOMICO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.VIVIENDA" label="VIVIENDA"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.TIPO_SANGUINEO" label="TIPO_SANGUINEO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.DISCAPACIDAD" label="DISCAPACIDAD"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.GRUPO_ETNICO" label="GRUPO_ETNICO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.RELIGION" label="RELIGION"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.CALLE" label="CALLE"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.NUMERO_EXT" label="NUMERO_EXT"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.NUMERO_INT" label="NUMERO_INT"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.ESTADO" label="ESTADO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.MUNICIPIO" label="MUNICIPIO"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.LOCALIDAD" label="LOCALIDAD"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.COLONIA" label="COLONIA"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.CODIGO_POSTAL" label="CODIGO_POSTAL"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.TELEFONO_1" label="TELEFONO_1"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="4">
+                                            <v-text-field v-model="paciente.TELEFONO_2" label="TELEFONO_2"
+                                                solo required></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn @click="dialog=false" color="blue-grey" dark>Cancelar</v-btn>
+                            <v-btn @click="guardar()" type="submit" color="purple accent-3" dark>Guardar</v-btn>
+                        </v-card-actions>
+                        </v-form>
+                    </v-card>
+                </v-dialog>
+            </v-main>
+        </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js" integrity="sha512-
+nqIFZC8560+CqHgXKez61MI0f9XSTKLkm0zFVm/99Wt0jSTZ7yeeYwbzyl0SGn/s8Mulbdw+ScCG41hmO2+FKw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.2/dist/sweetalert2.all.min.js"></script>
+    <script>
+        let url = 'http://localhost:8000/api/pacientes/';
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data() {
+                return {
+                    pacientes: [],
+                    dialog: false,
+                    operacion: '',
+                    paciente: {
+                        id: null,
+                        CURP: '',
+                        NOMBRE: '',
+                        APELLIDO_PATERNO: '',
+                        APELLIDO_MATERNO: '',
+                        NIVEL_SOCIOECONOMICO: '',
+                        VIVIENDA: '',
+                        TIPO_SANGUINEO: '',
+                        DISCAPACIDAD: '',
+                        GRUPO_ETNICO: '',
+                        RELIGION: '',
+                        CALLE: '',
+                        NUMERO_EXT: '',
+                        NUMERO_INT: '',
+                        ESTADO: '',
+                        MUNICIPIO: '',
+                        LOCALIDAD: '',
+                        COLONIA: '',
+                        CODIGO_POSTAL: '',
+                        TELEFONO_1: '',
+                        TELEFONO_2: ''
+                    }
+                }
+            },
+            created() {
+                this.mostrar()
+            },
+            methods: {
+                //MÉTODOS PARA EL CRUD
+                mostrar: function () {
+                    axios.get(url)
+                        .then(response => {
+                            this.pacientes = response.data;
+                        })
+                },
+                crear: function () {
+                    let parametros = {
+                        CURP: this.paciente.CURP, NOMBRE: this.paciente.NOMBRE, APELLIDO_PATERNO: this.paciente.APELLIDO_PATERNO, APELLIDO_MATERNO:
+                            this.paciente.APELLIDO_MATERNO, NIVEL_SOCIOECONOMICO: this.paciente.NIVEL_SOCIOECONOMICO, VIVIENDA: this.paciente.VIVIENDA,
+                            TIPO_SANGUINEO: this.paciente.TIPO_SANGUINEO, DISCAPACIDAD: this.paciente.DISCAPACIDAD, GRUPO_ETNICO: this.paciente.GRUPO_ETNICO,
+                            RELIGION: this.paciente.RELIGION, CALLE: this.paciente.CALLE, NUMERO_EXT: this.paciente.NUMERO_EXT, NUMERO_INT: this.paciente.NUMERO_INT,
+                            ESTADO: this.paciente.ESTADO, MUNICIPIO: this.paciente.MUNICIPIO, LOCALIDAD: this.paciente.LOCALIDAD, COLONIA: this.paciente.COLONIA,
+                            CODIGO_POSTAL: this.paciente.CODIGO_POSTAL, TELEFONO_1: this.paciente.TELEFONO_1, TELEFONO_2: this.paciente.TELEFONO_2
+                    };
+                    axios.post(url, parametros)
+                        .then(response => {
+                            this.mostrar();
+                        });
+                    this.paciente.CURP= "";
+                    this.paciente.NOMBRE= "";
+                    this.paciente.APELLIDO_PATERNO= "";
+                    this.paciente.APELLIDO_MATERNO= "";
+                    this.paciente.NIVEL_SOCIOECONOMICO= "";
+                    this.paciente.VIVIENDA= "";
+                    this.paciente.TIPO_SANGUINEO= "";
+                    this.paciente.DISCAPACIDAD= "";
+                    this.paciente.GRUPO_ETNICO= "";
+                    this.paciente.RELIGION= "";
+                    this.paciente.CALLE= "";
+                    this.paciente.NUMERO_EXT= "";
+                    this.paciente.NUMERO_INT= "";
+                    this.paciente.ESTADO= "";
+                    this.paciente.MUNICIPIO= "";
+                    this.paciente.LOCALIDAD= "";
+                    this.paciente.COLONIA= "";
+                    this.paciente.CODIGO_POSTAL= "";
+                    this.paciente.TELEFONO_1= "";
+                    this.paciente.TELEFONO_2= "";
+                },
+                editar: function () {
+                    let parametros = {
+                        CURP: this.paciente.CURP, NOMBRE: this.paciente.NOMBRE, APELLIDO_PATERNO: this.paciente.APELLIDO_PATERNO, APELLIDO_MATERNO:
+                            this.paciente.APELLIDO_MATERNO, NIVEL_SOCIOECONOMICO: this.paciente.NIVEL_SOCIOECONOMICO, VIVIENDA: this.paciente.VIVIENDA,
+                            TIPO_SANGUINEO: this.paciente.TIPO_SANGUINEO, DISCAPACIDAD: this.paciente.DISCAPACIDAD, GRUPO_ETNICO: this.paciente.GRUPO_ETNICO,
+                            RELIGION: this.paciente.RELIGION, CALLE: this.paciente.CALLE, NUMERO_EXT: this.paciente.NUMERO_EXT, NUMERO_INT: this.paciente.NUMERO_INT,
+                            ESTADO: this.paciente.ESTADO, MUNICIPIO: this.paciente.MUNICIPIO, LOCALIDAD: this.paciente.LOCALIDAD, COLONIA: this.paciente.COLONIA,
+                            CODIGO_POSTAL: this.paciente.CODIGO_POSTAL, TELEFONO_1: this.paciente.TELEFONO_1, TELEFONO_2: this.paciente.TELEFONO_2
+                    };
+                    //console.log(parametros);
+                    axios.put(url + this.paciente.id, parametros)
+                        .then(response => {
+                            this.mostrar();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                borrar: function (id) {
+                    Swal.fire({
+                        title: '¿Confirma eliminar el registro?',
+                        confirmButtonText: `Confirmar`,
+                        showCancelButton: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            //procedimiento borrar
+                            axios.delete(url + id)
+                                .then(response => {
+                                    this.mostrar();
+                                });
+                            Swal.fire('¡Eliminado!', '', 'success')
+                        } else if (result.isDenied) {
+                        }
+                    });
+                },
+                //Botones y formularios
+                guardar: function () {
+                    if (this.operacion == 'crear') {
+                        this.crear();
+                    }
+                    if (this.operacion == 'editar') {
+                        this.editar();
+                    }
+                    this.dialog = false;
+                },
+                formNuevo: function () {
+                    this.dialog = true;
+                    this.operacion = 'crear';
+                    this.paciente.CURP= '';
+                    this.paciente.NOMBRE= '';
+                    this.paciente.APELLIDO_PATERNO= '';
+                    this.paciente.APELLIDO_MATERNO= '';
+                    this.paciente.NIVEL_SOCIOECONOMICO= '';
+                    this.paciente.VIVIENDA= '';
+                    this.paciente.TIPO_SANGUINEO= '';
+                    this.paciente.DISCAPACIDAD= '';
+                    this.paciente.GRUPO_ETNICO= '';
+                    this.paciente.RELIGION= '';
+                    this.paciente.CALLE= '';
+                    this.paciente.NUMERO_EXT= '';
+                    this.paciente.NUMERO_INT= '';
+                    this.paciente.ESTADO= '';
+                    this.paciente.MUNICIPIO= '';
+                    this.paciente.LOCALIDAD= '';
+                    this.paciente.COLONIA= '';
+                    this.paciente.CODIGO_POSTAL= '';
+                    this.paciente.TELEFONO_1= '';
+                    this.paciente.TELEFONO_2= '';
+                },
+                formEditar: function (id, CURP, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, NIVEL_SOCIOECONOMICO, VIVIENDA, TIPO_SANGUINEO, DISCAPACIDAD, 
+                GRUPO_ETNICO, RELIGION, CALLE, NUMERO_EXT, NUMERO_INT, ESTADO, MUNICIPIO, LOCALIDAD, COLONIA, CODIGO_POSTAL, TELEFONO_1,TELEFONO_2) {
+                    this.paciente.id = id;
+                    this.paciente.CURP = CURP;
+                    this.paciente.NOMBRE= NOMBRE;
+                    this.paciente.APELLIDO_PATERNO= APELLIDO_PATERNO;
+                    this.paciente.APELLIDO_MATERNO= APELLIDO_MATERNO;
+                    this.paciente.NIVEL_SOCIOECONOMICO= NIVEL_SOCIOECONOMICO;
+                    this.paciente.VIVIENDA= VIVIENDA;
+                    this.paciente.TIPO_SANGUINEO= TIPO_SANGUINEO;
+                    this.paciente.DISCAPACIDAD= DISCAPACIDAD;
+                    this.paciente.GRUPO_ETNICO= GRUPO_ETNICO;
+                    this.paciente.RELIGION= RELIGION;
+                    this.paciente.CALLE= CALLE;
+                    this.paciente.NUMERO_EXT= NUMERO_EXT;
+                    this.paciente.NUMERO_INT= NUMERO_INT;
+                    this.paciente.ESTADO= ESTADO;
+                    this.paciente.MUNICIPIO= MUNICIPIO;
+                    this.paciente.LOCALIDAD= LOCALIDAD;
+                    this.paciente.COLONIA= COLONIA;
+                    this.paciente.CODIGO_POSTAL= CODIGO_POSTAL;
+                    this.paciente.TELEFONO_1= TELEFONO_1;
+                    this.paciente.TELEFONO_2= TELEFONO_2;
+                    this.dialog = true;
+                    this.operacion = 'editar';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
