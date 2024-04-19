@@ -56,7 +56,7 @@
   <button class="button">Consultas</button>
   <button class="button">Pacientes</button>
   <button class="button">Registros</button>
-  <button class="button">Mas</button>
+  <button class="button" ><a href="/calendar"></a>Calendario</button>
   <button class="button">Mas</button>
   <button class="button">Mas</button>
 </div>
