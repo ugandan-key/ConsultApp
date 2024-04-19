@@ -16,7 +16,7 @@
 <div id="app">
     <v-app>
         <v-main>
-            <h2 class="text-center">PACIENTES</h2>
+            <h2 class="text-center">USUARIOS</h2>
             <!-- Botón CREAR -->
             <v-card class="mx-auto mt-5" color="transparent" max-width="1280" elevation="0">
                 <v-btn class="mx-2" fab dark color="#E040FB" @click="formNuevo()">
@@ -28,32 +28,15 @@
                     <template v-slot:default>
                         <thead>
                         <tr class="purple darken-2">
-                            <input v-model="patient.id" type="hidden">
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.name" label="Nombre" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.lastname_p" label="Apellido Paterno" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.lastname_m" label="Apellido Materno" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.edad" label="Edad" type="number" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.cedula_profesional" label="Cedula Profesional" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.especialidad" label="Especialidad" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.cargo" label="Cargo" solo required></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4">
-                                <v-text-field v-model="patient.horario" label="Horario" solo required></v-text-field>
-                            </v-col>
-                            
+                            <th class="white--text">ID</th>
+                            <th class="white--text">Nombre</th>
+                            <th class="white--text">Apellido Paterno</th>
+                            <th class="white--text">Edad</th>
+                            <th class="white--text">Cedula Profesional</th>
+                            <th class="white--text">Especialidad</th>
+                            <th class="white--text">Cargo</th>
+                            <th class="white--text">Horario</th>
+                            <th class="white--text">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -270,3 +253,4 @@
 </script>
 </body>
 </html>
+
